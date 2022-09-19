@@ -8,10 +8,6 @@ type HashTable struct {
 	Array [] *bucket
 }
 
-func constructHashTable(givenSize int, newArray []*bucket) *HashTable{
-	newTable := new(HashTable)
-	return newTable
-}
 
 func filterNil(data []*bucket, predicate func(value any) bool) ([]*bucket){
 	result := []*bucket{}
