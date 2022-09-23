@@ -51,7 +51,59 @@ func Hash(key string) uint64{
 	return Hash % uint64(ArraySize)
 }
 
-func (h *HashTable) Insert(key string)  bool{
+
+func (h *HashTable) getKeys() []string {
+	nonNilArray := filterNil(h.Array, notNil);
+	emptyArr := make([]string, 0, len(nonNilArray) * 2);
+	for _, value := range nonNilArray {
+		currentNode := value.head;
+		currentDepthArr := make([]string, 0 , 64);
+		lastInsert := 0;
+		for currentNode != nil {
+			currentDepthArr[lastInsert] = currentNode.key;
+			currentNode = currentNode.next;
+		}
+		emptyArr = append(emptyArr, currentDepthArr...);
+	}
+	return emptyArr;
+}
+
+func (h *HashTable) getValue() []any{
+	nonNilArray := filterNil(h.Array, notNil);
+	emptyArr := make([]any, 0, len(nonNilArray) * 2);
+	for _, value := range nonNilArray {
+		currentNode := value.head;
+		currentDepthArr := make([]any, 0 , 64);
+		lastInsert := 0;
+		for currentNode != nil {
+			currentDepthArr[lastInsert] = currentNode.value;
+			currentNode = currentNode.next;
+		}
+		emptyArr = append(emptyArr, currentDepthArr...);
+	}
+	return emptyArr;
+}
+
+func (h *HashTable) getItems() [][]any{
+	nonNilArray := filterNil(h.Array, notNil);
+	emptyArr := make([][]any, 0, len(nonNilArray) * 2);
+	for _, value := range nonNilArray {
+		currentNode := value.head;
+		currentDepthArr := make([][]any, 0 , 64);
+		lastInsert := 0;
+		for currentNode != nil {
+			arrAtPoint := make([] any, 2, 2);
+			arrAtPoint[0] = currentNode.key
+			arrAtPoint[1] = currentNode.value
+			currentDepthArr[lastInsert] = arrAtPoint;
+			currentNode = currentNode.next;
+		}
+		emptyArr = append(emptyArr, currentDepthArr...);
+	}
+	return emptyArr;
+}
+
+func (h *HashTable) Insert(key string, value int)  bool{
 	// need to check size and weather to increase the size should also be done here
 	resize := checkResize(h.Array[:])
 	if (resize) {
@@ -61,7 +113,7 @@ func (h *HashTable) Insert(key string)  bool{
 
 	}
 	index := Hash(key)
-	return h.Array[index].insert(key)
+	return h.Array[index].insert(key, value)
 }
 
 func (h *HashTable) Search(key string) bool {

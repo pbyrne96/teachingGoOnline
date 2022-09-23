@@ -7,18 +7,22 @@ type bucket struct {
 
 }
 
+type bucketValue struct {
+	value int
+}
 
 type bucketNode struct {
 	key string
+	value *bucketValue
 	next *bucketNode
 }
 
 
 
-func (b *bucket) insert(k string) bool{
+func (b *bucket) insert(k string, v int) bool{
 	// improve this to double linked list
 	if (!b.search(k)) {
-		newNode := &bucketNode{key:k}
+		newNode := &bucketNode{key:k, value: &bucketValue{value: v}}
 		newNode.next = b.head
 		b.head = newNode
 		return true
