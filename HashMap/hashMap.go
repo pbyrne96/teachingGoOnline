@@ -25,7 +25,7 @@ func notNil(value any) bool{
 }
 
 func checkResize(data []*bucket) bool{
-   return len(filterNil(data, notNil)) == ArraySize
+   return len(filterNil(data, notNil)) == len(data)
 }
 
 func (h *HashTable) concatArrays(existingArray []*bucket) []*bucket{
