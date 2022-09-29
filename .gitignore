@@ -1,4 +1,4 @@
 */.vscode
 */.git
 .env
-./vscode/*
+/.vscode/*
