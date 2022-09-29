@@ -7,8 +7,6 @@ type MaxHeap struct {
 	nodes  []int;
 }
 
-
-
 func (h *MaxHeap) Insert (key int) {
 	h.nodes = append(h.nodes, key)
 	h.maxHeapifyUp(len(h.nodes) -1)
@@ -36,8 +34,7 @@ func (h *MaxHeap) maxHeapifyDown(index int) {
 		}
 		if h.nodes[index] < h.nodes[childToCompare] {
 			h.swop(index, childToCompare);
-			index = childToCompare
-			l, r = left(index), right(index)
+			l, r = left(childToCompare), right(childToCompare)
 		} else {
 			return
 		}
@@ -46,7 +43,6 @@ func (h *MaxHeap) maxHeapifyDown(index int) {
 
 func parent (i int) int {
 	return (i-1)/2
-
 }
 
 func left(i int) int {
@@ -72,7 +68,7 @@ func (h* MaxHeap) Extract () int{
 	h.nodes[0] = h.nodes[length];
 	h.nodes = h.nodes[:length]
 	h.maxHeapifyDown(0)
-
+	// h.maxHeapifyUp(length)
 	return extracted
 }
 
@@ -81,12 +77,17 @@ func (h* MaxHeap) Extract () int{
 
 func main () {
 		m := &MaxHeap{};
-		buildHeap := []int{10,20,30}
+		buildHeap := []int{10, 20, 30, 5, 7, 11, 13, 15, 17}
 
 		for _, v := range buildHeap {
 			m.Insert(v);
-			fmt.Println(v);
 		}
+		fmt.Println(m)
 
-		fmt.Println(m);
+		for i:=0; i < 5; i++ {
+			m.Extract();
+			fmt.Println(m)
+			i++;
+		}
+		fmt.Println(m)
 }
