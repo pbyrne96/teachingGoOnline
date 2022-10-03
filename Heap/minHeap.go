@@ -10,6 +10,7 @@ type HeapStructure struct {
 }
 
 
+
 func (h *HeapStructure) checkHeapAlloc () bool{
 	return len(h.heap) == cap(h.heap)
 }
