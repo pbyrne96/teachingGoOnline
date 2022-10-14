@@ -21,14 +21,14 @@ func maxCrossArray(nums []int, left int, right int, mid int) int {
 	leftSum := -1<<31
 	rightSum := -1<<31
 	sums:=0
-	for i := mid; i >= left; i++ {
+	for i := mid; i >= left; i-- {
 		sums += nums[i];
 		leftSum = max(leftSum, sums);
 	}
 	sums = 0;
-	for i:= mid +1; i <= right; i++ {
-		sums += nums[i];
-		rightSum = max(right, sums)
+	for j:= mid +1; j <= right; j++ {
+		sums += nums[j];
+		rightSum = max(rightSum, sums)
 	}
 
 	return leftSum + rightSum
@@ -36,7 +36,7 @@ func maxCrossArray(nums []int, left int, right int, mid int) int {
 
 
 func findMaxSubArray(nums []int, left int, right int ) int {
-	if (nums == nil || left == right) {
+	if (left == right) {
 		return nums[left];
 	}
 	mid := (left+right)/2
@@ -49,7 +49,7 @@ func findMaxSubArray(nums []int, left int, right int ) int {
 
 
 func main() {
-	problem := []int{-2,1,-3,4,-1,2,1,-5,4};
-	answer := findMaxSubArray(problem, 0, len(problem)-1)
+	problem := []int{-2, 1, -3, 4, -1, 2, 1, -5, 4};
+	answer := maxSubArray(problem)
 	fmt.Println(answer);
 }
